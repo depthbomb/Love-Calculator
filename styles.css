@@ -1,6 +1,6 @@
 .LoveMeterContainer{
 	margin: 4px auto;
-	width:95%;
+	width: 95%;
 }
 
 .LoveStatus{
@@ -26,32 +26,32 @@
 }
 
 progress.LoveMeter[value] {
-	position:relative;
-  /* Reset the default appearance */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-   appearance: none;
-   text-align: center;
+	position: relative;
+	/* Reset the default appearance */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	 appearance: none;
+	 text-align: center;
 
-  width: 100%;
-  height: 64px;
+	width: 100%;
+	height: 64px;
 }
 progress.LoveMeter:before {
-  content: attr(data-label);
-  font-size: 1.25rem;
-  vertical-align: 0;
-  
-  /*Position text over the progress bar */
-  position:absolute;
-  left:0;
-  right:0;
-  width: 100%;
-  height: 100%;
-  line-height: 64px;
-  text-shadow:1px 1px rgba(0,0,0,.5);
+	content: attr(data-label);
+	font-size: 1.25rem;
+	vertical-align: 0;
+	
+	/*Position text over the progress bar */
+	position:absolute;
+	left:0;
+	right:0;
+	width: 100%;
+	height: 100%;
+	line-height: 64px;
+	text-shadow: 1px 1px rgba(0,0,0,.5);
 }
 progress.LoveMeter[value]::-webkit-progress-bar {
-  background-color: #1b1d1f;
+	background-color: #1b1d1f;
 }
 
 progress.LoveMeter[value]::-webkit-progress-value {

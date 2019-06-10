@@ -88,7 +88,7 @@
 		}
 		elseif($per <= 50)
 		{
-			return "[This message is to be implemented.]";
+			return "Your views of yourself <em>could</em> be better";
 		}
 		elseif($per > 50 AND $per < 90)
 		{

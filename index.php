@@ -11,8 +11,13 @@
 
 	(int) $love_num = love($owner, $visitor);
 
-?><style><?=file_get_contents("animations.css").file_get_contents("styles.css");?></style>
-<script>$(document).ready(function() {document.getElementById('tpm__sLoveCalculator').style = null;})</script>
+?>
+<style><?=file_get_contents("animations.css").file_get_contents("styles.css");?></style>
+<script type="text/javascript">
+	$(document).ready(function() {
+		document.getElementById('tpm__sLoveCalculator').style = null; // tom pls
+	});
+</script>
 <module id="love-calculator" class="PageModule SingleRowProfileModule MemberProfileModule">
 	<h3>
 		<a href="http://gamebanana.com/modules/519" target="_blank">Love 💕 Calculator</a>
