@@ -80,7 +80,7 @@
 		$left  = user_info($owner, 'upic') !== null ? '<img src="'.user_info($owner, 'upic').'" alt="'.$left_username.'">' : $left_username ;
 		$right  = user_info($visitor, 'upic') !== null ? '<img src="'.user_info($visitor, 'upic').'" alt="'.$right_username.'">' : $right_username ;
 
-		return is_owner() ? 'You & Yourself' : $left . ' &times; ' . $right;
+		return is_owner() ? 'Yourself' : $left . ' &times; ' . $right;
 	}
 
 	function members_list(int $owner) : string {
