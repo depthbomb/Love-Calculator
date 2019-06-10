@@ -29,7 +29,7 @@
 	}
 
 	/**
-	 * TODO: Rewrite using a switch statement
+	 * TODO: Potentially rewrite this
 	*/
 	function love_message($per) : string {
 		if($per <= 0)

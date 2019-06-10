@@ -3,7 +3,17 @@
 	$visitor = $_GET["_idMember"] ?? null;
 	$owner = $_GET["_idProfile"] ?? null;
 
-	if ($visitor ===  null || $owner === null) die();
+	/**
+	 * Just kill it all here if either ID above is unavailable.
+	 * An example of this happening is if a guest (not logged-in) user views a profile
+	 * At the moment, there is no guest view of the module, so let's just not show anything.
+	 */
+	if (
+		$visitor === null ||
+		$visitor === '' ||
+		$owner === null ||
+		$owner === ''
+	) die('<!--	No valid IDs available for module to function.	-->');
 	
 	require_once('./vendor/autoload.php');
 	require_once('./inc/helpers.php');
@@ -15,7 +25,11 @@
 <style><?=file_get_contents("animations.css").file_get_contents("styles.css");?></style>
 <script type="text/javascript">
 	$(document).ready(function() {
-		document.getElementById('tpm__sLoveCalculator').style = null; // tom pls
+		/**
+		 * For some reason, third party modules have a hardcoded font size value set that official modules don't have.
+		 * This line prevents that. Tom, please fix!
+		 */
+		document.getElementById('tpm__sLoveCalculator').style = null;
 	});
 </script>
 <module id="love-calculator" class="PageModule SingleRowProfileModule MemberProfileModule">

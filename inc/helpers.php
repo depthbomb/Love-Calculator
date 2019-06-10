@@ -98,7 +98,7 @@
 			$table_rows = [];
 			$mems = $members->findAll();
 			foreach ($mems as $m) {
-				// TODO: redo these 6 lines below...
+				// TODO: Redo these 6 lines below...
 				$_avatar = user_info($m->id, 'avatar');
 				$_upic = user_info($m->id, 'upic');
 				$_username = user_info($m->id, 'username');
