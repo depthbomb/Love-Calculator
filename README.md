@@ -6,4 +6,4 @@ It works by taking the profile and visitor IDs into account when generating a se
 
 ---
 
-This module uses only one Compose library called [Filebase.](https://github.com/filebase/Filebase) It is used for caching user info for later use and storing love calculations for profiles.
+This module uses only one Composer library called [Filebase.](https://github.com/filebase/Filebase) It is used for caching user info for later use and storing love calculations for profiles.
