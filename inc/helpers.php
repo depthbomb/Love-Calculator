@@ -31,6 +31,7 @@
 			$upic     = !$data[1] ? null : $data[1];
 			$avatar   = $data[2];
 
+			$mem->id = $id;
 			$mem->username = $username;
 			$mem->upic = $upic;
 			$mem->avatar = $avatar;
@@ -38,8 +39,11 @@
 		}
 
 		switch ($field) {
-			case 'username':
 			default:
+			case 'id':
+				$return = $id;
+				break;
+			case 'username':
 				$return = $db->get($id)->username;
 				break;
 			case 'upic':
@@ -72,8 +76,44 @@
 	function headline(int $owner, int $visitor) : string {
 		$left_username = htmlspecialchars(user_info($owner, 'username'));
 		$right_username = htmlspecialchars(user_info($visitor, 'username'));
-		$left = '<img src="'.user_info($owner, 'upic').'" alt="'.$left_username.'">' ?? $left_username;
-		$right = '<img src="'.user_info($visitor, 'upic').'" alt="'.$right_username.'">' ?? $right_username;
+
+		$left  = user_info($owner, 'upic') !== null ? '<img src="'.user_info($owner, 'upic').'" alt="'.$left_username.'">' : $left_username ;
+		$right  = user_info($visitor, 'upic') !== null ? '<img src="'.user_info($visitor, 'upic').'" alt="'.$right_username.'">' : $right_username ;
 
 		return is_owner() ? 'You & Yourself' : $left . ' &times; ' . $right;
+	}
+
+	function members_list(int $owner) : string {
+		$members = new \Filebase\Database([
+			'dir'            => "./database/member_$owner",
+			'format'         => \Filebase\Format\Json::class,
+			'cache'          => true,
+			'cache_expires'  => 1800,
+			'pretty'         => false,
+			'safe_filename'  => true,
+			'read_only'      => true
+		]);
+
+		if ($members->count() > 0) {
+			$table_rows = [];
+			$mems = $members->findAll();
+			foreach ($mems as $m) {
+				// TODO: redo these 6 lines below...
+				$_avatar = user_info($m->id, 'avatar');
+				$_upic = user_info($m->id, 'upic');
+				$_username = user_info($m->id, 'username');
+				$avatar = '<a href="https://gamebanana.com/members/'.$m->id.'" class="Avatar"><img src="'.$_avatar.'" alt="'.$_username.'" title="'.$_username.'" style="width:25px;height:25px;"></a>';
+				$upic = $_upic !== null ? '<img src="'.$_upic.'" alt="'.$_username.'" title="'.$_username.'">' : null;
+				$username = '<a href="https://gamebanana.com/members/'.$m->id.'">'.$upic ?? $_username.'</a>';
+
+				$tr = "<tr><td>$avatar $username</td><td>{$m->value}%</td><td>{$m->createdAt()}</td></tr>";
+				$table_rows[] = $tr;
+			}
+
+			$joined_rows = implode('', $table_rows);
+
+			return "<table style=\"padding:1rem;width:100%;\"><thead><tr><th>Member</th><th>Love</th><th>Date</th></tr></thead><tbody>$joined_rows</tbody></table>";
+		} else {
+			return '<ul class="LogMessages"><li class="RedColor">No member data available.</li></ul>';
+		}
 	}

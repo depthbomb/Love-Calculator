@@ -9,25 +9,18 @@
 		srand();	//	Reset seeding just in case...
 		
 		$db = new \Filebase\Database([
-			'dir'            => "./database/member_$owner",
-			'format'         => \Filebase\Format\Json::class,
-			'cache'          => true,
-			'cache_expires'  => 1800,
-			'pretty'         => false,
-			'safe_filename'  => true,
-			'read_only'      => false
+			'dir'           => "./database/member_$owner",
+			'format'        => \Filebase\Format\Json::class,
+			'cache'         => true,
+			'cache_expires' => 1800,
+			'pretty'        => false,
+			'safe_filename' => true,
+			'read_only'     => false
 		]);
 
-		if ($db->has($visitor)) {
+		if (!$db->has($visitor)) {
 			$v = $db->get($visitor);
-			$v->username = user_info($visitor, 'username');
-			$v->avatar = user_info($visitor, 'avatar');
-			//	The love value shouldn't change unless seeding changes, so don't update it
-			$v->save();
-		} else {
-			$v = $db->get($visitor);
-			$v->username = user_info($visitor, 'username');
-			$v->avatar = user_info($visitor, 'avatar');
+			$v->id = $visitor;
 			$v->value = $love;
 			$v->save();
 		}

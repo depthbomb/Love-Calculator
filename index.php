@@ -32,5 +32,13 @@
 			</progress>
 		</div>
 		<q class="LoveStatus"><?=(is_owner() ? love_message_self($love_num) : love_message($love_num));?></q>
+		<?php if(is_owner()): ?>
+		<div style="text-align:center;">
+			<a href="javascript:;" onclick="$('#lc-members').fadeToggle()">Toggle Your Scores</a>
+		</div>
+		<div id="lc-members" style="display:none;">
+			<?=members_list($owner);?>
+		</div>
+		<?php endif; ?>
 	</div>
 </module>
