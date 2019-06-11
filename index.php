@@ -41,7 +41,7 @@
 			<div class="LoveContestants">
 				<?=headline($owner, $visitor);?>
 			</div>
-			<progress class="LoveMeter" value="<?=$love_num;?>" max="<?=$love_num;?>" data-label="<?=$love_num;?>%">
+			<progress class="LoveMeter" value="<?=$love_num;?>" max="<?=$love_num > 100 ? 101 : 100;?>" data-label="<?=$love_num;?>%">
 				<?=$love_num;?>%
 			</progress>
 		</div>
