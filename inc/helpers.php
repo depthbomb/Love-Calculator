@@ -11,13 +11,13 @@
 	function user_info(int $id, string $field) : ?string {
 		$return = '';
 		$db = new \Filebase\Database([
-			'dir'            => "./database/member_data",
-			'format'         => \Filebase\Format\Json::class,
-			'cache'          => true,
-			'cache_expires'  => 1800,
-			'pretty'         => false,
-			'safe_filename'  => true,
-			'read_only'      => false
+			'dir'           => "./database/member_data",
+			'format'        => \Filebase\Format\Json::class,
+			'cache'         => true,
+			'cache_expires' => 1800,
+			'pretty'        => false,
+			'safe_filename' => true,
+			'read_only'     => false
 		]);
 
 		if (!$db->has($id)) {
@@ -36,6 +36,21 @@
 			$mem->upic = $upic;
 			$mem->avatar = $avatar;
 			$mem->save();
+		} else {
+			// Update existing member's avatar and upic after 1 week
+			$mem = $db->get($id);
+			if (($mem->updatedAt(false) + 604800) <= time()) {
+				$data = json_decode(file_get_contents("https://api.gamebanana.com/Core/Item/Data?itemtype=Member&itemid={$id}&fields=Url().sGetUpicUrl(),Url().sGetAvatarUrl()"), true);
+
+				if (array_key_exists('error', $data)) throw new \Exception($data['error']);
+
+				$upic   = !$data[0] ? null : $data[0];
+				$avatar = $data[1];
+
+				$mem->upic = $upic;
+				$mem->avatar = $avatar;
+				$mem->save();
+			}
 		}
 
 		switch ($field) {
