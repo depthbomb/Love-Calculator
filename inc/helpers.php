@@ -98,16 +98,18 @@
 			$table_rows = [];
 			$mems = $members->findAll();
 			foreach ($mems as $m) {
-				// TODO: Redo these 6 lines below...
-				$_avatar = user_info($m->id, 'avatar');
-				$_upic = user_info($m->id, 'upic');
-				$_username = user_info($m->id, 'username');
-				$avatar = '<a href="https://gamebanana.com/members/'.$m->id.'" class="Avatar"><img src="'.$_avatar.'" alt="'.$_username.'" title="'.$_username.'" style="width:25px;height:25px;"></a>';
-				$upic = $_upic !== null ? '<img src="'.$_upic.'" alt="'.$_username.'" title="'.$_username.'">' : null;
-				$username = '<a href="https://gamebanana.com/members/'.$m->id.'">'.$upic ?? $_username.'</a>';
+				if ($m->id > 0) {
+					// TODO: Redo these 6 lines below...
+					$_avatar = user_info($m->id, 'avatar');
+					$_upic = user_info($m->id, 'upic');
+					$_username = user_info($m->id, 'username');
+					$avatar = '<a href="https://gamebanana.com/members/'.$m->id.'" class="Avatar"><img src="'.$_avatar.'" alt="'.$_username.'" title="'.$_username.'" style="width:25px;height:25px;"></a>';
+					$upic = $_upic !== null ? '<img src="'.$_upic.'" alt="'.$_username.'" title="'.$_username.'">' : null;
+					$username = '<a href="https://gamebanana.com/members/'.$m->id.'">'.$upic ?? $_username.'</a>';
 
-				$tr = "<tr><td>$avatar $username</td><td>{$m->value}%</td><td>{$m->createdAt()}</td></tr>";
-				$table_rows[] = $tr;
+					$tr = "<tr><td>$avatar $username</td><td>{$m->value}%</td><td>{$m->createdAt()}</td></tr>";
+					$table_rows[] = $tr;
+				}
 			}
 
 			$joined_rows = implode('', $table_rows);
