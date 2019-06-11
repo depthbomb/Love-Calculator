@@ -28,67 +28,51 @@
 		return $love;
 	}
 
-	/**
-	 * TODO: Potentially rewrite this
-	*/
-	function love_message($per) : string {
-		if($per <= 0)
-		{
-			return "<i>Uh oh!</i> Maybe you two should see other people";
-		}
-		elseif($per >= 10 AND $per < 20)
-		{
-			return "Awful&hellip; 😭";
-		}
-		elseif($per >= 20 AND $per < 40)
-		{
-			return "Not too great";
-		}
-		elseif($per >= 40 AND $per < 50)
-		{
-			return "Worse than average";
-		}
-		elseif($per == 50)
-		{
-			return "There could be a chance";
-		}
-		elseif($per > 50 AND $per < 75)
-		{
-			return "Not bad!";
-		}
-		elseif($per === 69)
-		{
-			return "<strong>( ͡° ͜ʖ ͡°)</strong>";
-		}
-		elseif($per >= 75 AND $per < 90)
-		{
-			return "Pretty good!";
-		}
-		elseif($per >= 90 AND $per < 99)
-		{
-			return "Great! 😄";
-		}
-		elseif($per >= 100)
-		{
-			return "A perfect match! 😍";
+	function love_message(int $per) : string {
+		switch (true) {
+			case $per < 10:
+				return '<i>Uh oh!</i> Maybe you two should see other people.';
+				break;
+			case in_array($per, range(10, 19)):
+				return 'Awful&hellip; 😭';
+				break;
+			case in_array($per, range(20, 39)):
+				return 'Not too great&hellip;';
+				break;
+			case in_array($per, range(40, 49)):
+				return 'Worse than average.';
+				break;
+			case in_array($per, range(50, 68)):
+				return 'There could be a chance';
+				break;
+			case $per === 69:
+				return '<strong>( ͡° ͜ʖ ͡°)</strong>';
+				break;
+			case in_array($per, range(70, 89)):
+				return 'Pretty good!';
+				break;
+			case in_array($per, range(90, 99)):
+				return 'Great! 😄';
+				break;
+			case $per > 99:
+				return 'A perfect match! 😍';
+				break;
 		}
 	}
 
-	function love_message_self($per) : string {
-		if($per <= 10)
-		{
-			return "<i>Uh oh!</i> Maybe you should seek a therapist";
-		}
-		elseif($per <= 50)
-		{
-			return "Your views of yourself <em>could</em> be better";
-		}
-		elseif($per > 50 AND $per < 90)
-		{
-			return "Glad to see you love yourself quite well";
-		}
-		elseif($per >= 90)
-		{
-			return "You are narcissistic";
+	function love_message_self(int $per) : string {
+		switch (true) {
+			case $per <= 10:
+				return '<i>Uh oh!</i> Maybe you should seek a therapist.';
+				break;
+			case $per < 50:
+				return 'Your views of yourself <em>could</em> be better';
+				break;
+			case in_array($per, range(50, 90)):
+				return 'Glad to see you love yourself quite well';
+				break;
+			case $per > 90:
+				return 'You are narcissistic';
+				break;
 		}
 	}
