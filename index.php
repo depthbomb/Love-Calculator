@@ -2,11 +2,9 @@
 
 	require_once('./env.php');
 
-	$uri = urldecode(
-		parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
-	);
+	$uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
-	if (str_replace('/modules/love/', '', $uri) !== KEY) die('Invalid module key'); 
+	if (strpos($uri, KEY) === false) die('Invalid module key'); 
 
 	$visitor = $_GET["_idMember"] ?? null;
 	$owner = $_GET["_idProfile"] ?? null;

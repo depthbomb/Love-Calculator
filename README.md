@@ -16,3 +16,5 @@ As of 6/11/2019, the module will only function with a valid key. To test this wi
 
 	define('KEY', 'YOUR SECRET KEY HERE');
 ```
+
+Then, access it with `/path/to/module/index.php/<KEY>`
