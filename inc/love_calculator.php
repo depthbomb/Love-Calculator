@@ -7,7 +7,7 @@
 		$seed = srand($owner+$visitor*($owner+$visitor)+$visitor);
 		$love = rand(0, 101);
 		srand();	//	Reset seeding just in case...
-		
+
 		$db = new \Filebase\Database([
 			'dir'           => "./database/member_$owner",
 			'format'        => \Filebase\Format\Json::class,
