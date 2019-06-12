@@ -111,7 +111,7 @@
 
 		if ($members->count() > 0) {
 			$table_rows = [];
-			$mems = $members->findAll();
+			$mems = $members->orderBy('__created_at', 'DESC')->results(0);
 			foreach ($mems as $m) {
 				if ($m->id > 0) {
 					// TODO: Redo these 6 lines below...
