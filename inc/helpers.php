@@ -118,9 +118,9 @@
 					$_avatar = user_info($m->id, 'avatar');
 					$_upic = user_info($m->id, 'upic');
 					$_username = user_info($m->id, 'username');
-					$avatar = '<a href="https://gamebanana.com/members/'.$m->id.'" class="Avatar"><img src="'.$_avatar.'" alt="'.$_username.'" title="'.$_username.'" style="width:25px;height:25px;"></a>';
+					$avatar = '<a href="https://gamebanana.com/members/'.$m->id.'" class="Avatar" style="margin-right:0.5rem;"><img src="'.$_avatar.'" alt="'.$_username.'" title="'.$_username.'" style="width:25px;height:25px;"></a>';
 					$upic = $_upic !== null ? '<img src="'.$_upic.'" alt="'.$_username.'" title="'.$_username.'">' : null;
-					$username = '<a href="https://gamebanana.com/members/'.$m->id.'">'.$upic ?? $_username.'</a>';
+					$username = '<a href="https://gamebanana.com/members/'.$m->id.'">'.($upic ?? $_username).'</a>';
 
 					$tr = "<tr><td>$avatar $username</td><td>{$m->value}%</td><td>{$m->createdAt()}</td></tr>";
 					$table_rows[] = $tr;
