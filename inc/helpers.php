@@ -2,11 +2,10 @@
 
 	/**
 	 * Stores GB user info so we don't need to use the API each time
-	 * TODO: Add a way to update old info
-	 * 
-	 * @param int $id
+	 *
+	 * @param integer $id
 	 * @param string $field
-	 * @return string
+	 * @return string|null
 	 */
 	function user_info(int $id, string $field) : ?string {
 		$return = '';
